@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { addJob } from "../api/jobApi";
-import { getRoleFromToken } from "../utils/jwt";
 
 function AdminAddJob() {
   // console.log("Current Role:", getRoleFromToken());

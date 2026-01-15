@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   getApplicants,
   updateApplicationStatus,
@@ -10,18 +10,18 @@ function AdminApplicants() {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-  const loadApplicants = () => {
+  const loadApplicants = useCallback(() => {
     getApplicants(jobId, page, 5)
       .then((res) => {
         setApps(res.data.content);
         setTotalPages(res.data.totalPages);
       })
       .catch(() => alert("403 – Login as ADMIN"));
-  };
+  }, [jobId, page]);
 
   useEffect(() => {
     if (jobId) loadApplicants();
-  }, [page]);
+  }, [jobId, page, loadApplicants]);
 
   return (
     <div>
